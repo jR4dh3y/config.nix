@@ -21,13 +21,11 @@
   fileSystems."/mnt/cmn" =
     { device = "/dev/disk/by-uuid/125AE0325AE013EF";
       fsType = "ntfs-3g";
-      options = [ "rw" ];
     };
   
   fileSystems."/mnt/win" = 
     { device = "/dev/disk/by-uuid/402CAC452CAC3834";
       fsType = "ntfs-3g";
-      options = [ "rw" "uid=1000" ];
     };
     
 

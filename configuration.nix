@@ -5,7 +5,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./system/hypr.nix
+      ./system/qtile.nix
+      # ./system/hypr.nix
     ];
 
   # Bootloader.
@@ -45,14 +46,14 @@
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
   };
-  services.desktopManager.plasma6.enable = true;
+  
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  # Enable Desktop Environment.
   services.displayManager.ly.enable = true;
-  # services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -62,8 +63,8 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  hardware.bluetooth.enable = true;
 
-  # hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -79,22 +80,34 @@
 
   hardware.graphics.enable = true;
   hardware.nvidia.open = false;
-  # services.xserver.videoDrivers = [ "nvidia" ];
   
   # Enable the NVIDIA driver.
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaPersistenced.enable = true;
     nvidiaSettings.enable = true;
+    powerManagement.finegrained = false;
+    # nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     # Enable the NVIDIA driver.
     # This is required for PRIME offloading.
   };
 
+  
   hardware.nvidia.prime = {
-  # intelBusId = "PCI:X:X:X";
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
     amdgpuBusId = "PCI:6:0:0";
     nvidiaBusId = "PCI:1:0:0";
   };
+
+  services.xserver.videoDrivers = [
+    "modesetting"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
+    "amdgpu"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
+    "nvidia"
+  ];
 
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
