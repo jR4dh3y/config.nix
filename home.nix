@@ -10,18 +10,22 @@
   # Home Manager dotfiles.
   
   home.file = {
-      ".config/qtile".source = ./cfg/qtile;
-      ".config/dunst".source = ./cfg/dunst;
-      ".config/rofi".source = ./cfg/rofi;
-      ".config/kitty".source = ./cfg/kitty;
-      ".config/gtk-4.0".source = ./cfg/gtk4;
-      ".config/gtk-3.0".source = ./cfg/gtk3;
-      ".config/picom".source = ./cfg/picom;
-      ".config/fish".source = ./cfg/fish;
-      ".local/share" .source = ./cfg/local/share;
-      ".config/nitrogen".source = ./cfg/nitrogen;
-      ".config/fontconfig".source = ./cfg/fontconfig;
-      ".config/cava".source = ./cfg/cava;
+      ".config/qtile".source = ./cfg/Qtile/qtile;
+      ".config/dunst".source = ./cfg/Qtile/dunst;
+      ".config/rofi".source = ./cfg/Qtile/rofi;
+      ".config/kitty".source = ./cfg/Qtile/kitty;
+      ".config/gtk-4.0".source = ./cfg/Qtile/gtk-4.0;
+      ".config/gtk-3.0".source = ./cfg/Qtile/gtk-3.0;
+      ".config/picom".source = ./cfg/Qtile/picom;
+      ".config/fish".source = ./cfg/Qtile/fish;
+      ".config/nitrogen".source = ./cfg/Qtile/nitrogen;
+      ".config/fontconfig".source = ./cfg/Qtile/fontconfig;
+      ".config/cava".source = ./cfg/Qtile/cava;
+      ".local/share/fonts".source = ./cfg/Qtile/local/share/fonts;
+      ".local/share/icons".source = ./cfg/Qtile/local/share/icons;
+      ".local/share/rofi".source = ./cfg/Qtile/local/share/rofi;
+      ".local/share/themes".source = ./cfg/Qtile/local/share/themes;
+      ".local/share/wallpapers".source = ./cfg/Qtile/local/share/wallpapers;
     };
 
   # Home Manager can also manage your environment variables.
