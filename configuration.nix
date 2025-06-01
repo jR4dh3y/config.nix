@@ -6,6 +6,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./system/qtile.nix
+  
       # ./system/hypr.nix
     ];
 
@@ -20,7 +21,7 @@
   # };
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.supportedFilesystems = [ "ntfs" ];
 
   networking.hostName = "pico-nix"; 
@@ -46,7 +47,10 @@
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
   };
-  
+
+
+  services.ratbagd.enable = true;
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
@@ -78,35 +82,19 @@
     #jack.enable = true;
   };
 
-  hardware.graphics.enable = true;
-  hardware.nvidia.open = false;
-  
-  # Enable the NVIDIA driver.
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaPersistenced.enable = true;
-    nvidiaSettings.enable = true;
-    powerManagement.finegrained = false;
-    # nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # Enable the NVIDIA driver.
-    # This is required for PRIME offloading.
-  };
-
-  
-  hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
-    };
-    amdgpuBusId = "PCI:6:0:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
+  # hardware.nvidia.prime = {
+  #   offload = {
+  #     enable = true;
+  #     enableOffloadCmd = true;
+  #   };
+  #   amdgpuBusId = "PCI:6:0:0";
+  #   nvidiaBusId = "PCI:1:0:0";
+  # };
 
   services.xserver.videoDrivers = [
-    "modesetting"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
     "amdgpu"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
-    "nvidia"
+    # "nvidia"
+    # "modesetting"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
   ];
 
   
@@ -181,7 +169,7 @@
    nix.gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 3d";
+      options = "--delete-older-than 1nixd";
    };
   
   programs.fish.enable = true;

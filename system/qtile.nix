@@ -8,7 +8,7 @@
         ];
     };
 
-    services.xserver.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
+    services.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
 
     environment.systemPackages = with pkgs; [
         python313Packages.cffi
@@ -18,6 +18,7 @@
         scrot
         xclip
         nitrogen
+        brightnessctl
         feh
         playerctl
         rofi
@@ -25,6 +26,7 @@
         dunst
         alsa-utils
         kitty
-        picom-pijulius
+        # picom-pijulius
+        picom
     ];
 }
